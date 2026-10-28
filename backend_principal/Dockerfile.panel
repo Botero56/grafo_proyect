@@ -1,0 +1,23 @@
+# Panel interno (app/services/panel_entry.py): sirve el front de
+# configuración (panel_static/, lo copia ops/deploy_panel.sh desde
+# frontend.git) y reenvía /api/v1/admin/* al worker. Solo dependencias base.
+FROM python:3.11-slim
+
+COPY --from=ghcr.io/astral-sh/uv:0.8.11 /uv /usr/local/bin/uv
+
+ENV UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy
+
+WORKDIR /app
+
+COPY pyproject.toml uv.lock .python-version ./
+RUN uv sync --frozen --no-default-groups
+
+COPY app ./app
+COPY panel_static ./panel_static
+
+ENV PATH="/app/.venv/bin:$PATH" \
+    PORT=8080 \
+    PANEL_STATIC_DIR=/app/panel_static
+
+CMD exec uvicorn app.services.panel_entry:app --host 0.0.0.0 --port ${PORT} --workers 1

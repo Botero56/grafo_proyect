@@ -1,0 +1,124 @@
+# Tests + build + despliegue SIN tráfico de los dos servicios de Cloud Run,
+# cada uno con su imagen (Dockerfile.webhook / Dockerfile.worker). Se lanza
+# con ops/deploy.sh, que sube exactamente el commit HEAD (git archive) y
+# pasa _TAG=c-<sha>:
+#
+#   ./ops/deploy.sh
+#
+# Las revisiones nuevas quedan con la URL etiquetada
+# (https://c-<sha>---<servicio>-...run.app) y 0 % del tráfico. Tras la
+# prueba de humo, el tráfico se mueve a mano (docs/RUNBOOK.md):
+#
+#   gcloud run services update-traffic j2ys-lt-app   --region us-central1 --to-latest
+#   gcloud run services update-traffic j2ys-lt-plain --region us-central1 --to-latest
+#
+# Reemplaza a `gcloud run deploy --source .`, que solo sabe construir el
+# Dockerfile de la raíz. Las dos imágenes salen del MISMO commit y se
+# despliegan en orden: primero el worker (debe entender cualquier tarea que
+# el webhook nuevo encole), después el webhook.
+#
+# `gcloud run deploy --image` conserva variables de entorno, secretos,
+# cuenta de servicio y política IAM ya configurados en cada servicio. El
+# acceso (worker privado, webhook público) NO se fija acá a propósito:
+# cambiar el IAM exige run.services.setIamPolicy, que la cuenta de Cloud
+# Build (Compute por defecto, roles/editor) no tiene, y darle run.admin solo
+# para reafirmar algo que no cambia sería ampliar permisos sin necesidad.
+#
+# Requisitos (una vez): ver la sección de despliegue de README.md.
+
+substitutions:
+  _REGION: us-central1
+  _REPO: j2ys
+  _WEBHOOK_SERVICE: j2ys-lt-plain
+  _WORKER_SERVICE: j2ys-lt-app
+  # Etiqueta de las revisiones nuevas; ops/deploy.sh pasa c-<sha corto>.
+  _TAG: manual
+
+steps:
+  # Los tests (sin evals, que llaman al modelo real) bloquean el despliegue.
+  # Variables de prueba: el fake de Firestore y los mocks no tocan GCP.
+  - id: test
+    name: python:3.11-slim
+    entrypoint: bash
+    env:
+      - APP_SECRET=test
+      - VERIFY_TOKEN=test-verify
+      - API_KEY=test-admin-key
+      - PROJECT_ID=$PROJECT_ID
+      - DATABASE=test
+      - MODEL_RESTAURANT=gemini-test
+      - GOOGLE_CLOUD_PROJECT=$PROJECT_ID
+    args:
+      - -c
+      - pip install -q uv==0.8.11 && uv sync --frozen && uv run pytest -q -p no:cacheprovider
+    waitFor: ["-"]
+
+  - id: build-worker
+    name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -f
+      - Dockerfile.worker
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/worker:$BUILD_ID
+      - .
+    waitFor: [test]
+
+  - id: build-webhook
+    name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -f
+      - Dockerfile.webhook
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/webhook:$BUILD_ID
+      - .
+    waitFor: [test]
+
+  - id: push-worker
+    name: gcr.io/cloud-builders/docker
+    args: [push, "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/worker:$BUILD_ID"]
+    waitFor: [build-worker]
+
+  - id: push-webhook
+    name: gcr.io/cloud-builders/docker
+    args: [push, "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/webhook:$BUILD_ID"]
+    waitFor: [build-webhook]
+
+  # Worker privado (IAM: solo la cuenta de Cloud Tasks/Scheduler invoca).
+  # --max-instances 1: los locks por conversación viven en memoria del
+  # proceso (ver el docstring de app/services/worker_entry.py).
+  - id: deploy-worker
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_WORKER_SERVICE}
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/worker:$BUILD_ID
+      - --region=${_REGION}
+      - --max-instances=1
+      - --no-traffic
+      - --tag=${_TAG}
+    waitFor: [push-worker, push-webhook]
+
+  # Webhook público (IAM: allUsers): lo llaman Meta/Kapso y el navegador.
+  - id: deploy-webhook
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_WEBHOOK_SERVICE}
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/webhook:$BUILD_ID
+      - --region=${_REGION}
+      - --no-traffic
+      - --tag=${_TAG}
+    waitFor: [deploy-worker]
+
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/worker:$BUILD_ID
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/webhook:$BUILD_ID
+
+options:
+  logging: CLOUD_LOGGING_ONLY

@@ -1,0 +1,28 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.env
+# Virtual environments
+.venv
+
+# Imágenes de menú del día descargadas (ver app/services/daily_menu/media_downloader.py)
+app/services/daily_menu/media/*
+!app/services/daily_menu/media/.gitkeep
+
+# Backups de datos reales exportados de Firestore (contienen PII: teléfonos)
+backups/
+*.deb
+config.yaml
+
+# Reportes Excel generados por app.services.excel_report_service
+reports/
+
+# Output/caché local de la skill graphify (regenerable, no debe subirse)
+graphify-out/
+
+# Resultados de la prueba de estrés (loadtest/locustfile.py)
+loadtest_results/

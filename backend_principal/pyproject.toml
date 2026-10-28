@@ -1,0 +1,54 @@
+[project]
+name = "j2ys-chat-automatization"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+# Base = lo que necesita el servicio de webhook (Dockerfile.webhook): recibir
+# y encolar en Cloud Tasks, más el onboarding, que escribe en Firestore.
+# Todo lo del agente/reportes va en el grupo `worker`.
+dependencies = [
+    "fastapi>=0.141.1",
+    "fireo>=2.2.2",
+    "google-cloud-firestore>=2.11.1",
+    "google-cloud-secret-manager>=2.20.0",
+    "google-cloud-tasks>=2.19.3",
+    "httpx>=0.28.1",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.15.0",
+    "uvicorn>=0.52.4",
+]
+
+[dependency-groups]
+# Solo el worker (Dockerfile.worker): agentes, audio, comprobantes, reportes.
+worker = [
+    "google-adk>=2.8.0",
+    "google-cloud-storage>=3.4.1",
+    "matplotlib>=3.11.1",
+    "mutagen>=1.48.1",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.5",
+    "pillow>=12.3.0",
+    "seaborn>=0.13.2",
+]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+]
+loadtest = [
+    "locust>=2.46.7",
+]
+
+[tool.uv]
+# En local `uv sync` instala todo (los tests cubren ambos servicios). Las
+# imágenes eligen: `--no-default-groups` (webhook) o además `--group worker`.
+default-groups = ["dev", "worker"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+# Solo tests/: sin esto, `pytest` a secas recoge cualquier test_*.py del repo.
+testpaths = ["tests"]
+# La suite de evaluación (modelo real: cuesta y tarda) se corre aparte, antes
+# de desplegar: `uv run pytest -m eval tests/evals`.
+markers = ["eval: conversaciones contra el modelo real (ver tests/evals)"]
+addopts = "-m 'not eval'"

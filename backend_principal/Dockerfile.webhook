@@ -1,0 +1,27 @@
+# Webhook público (app/services/webhook_entry.py): verifica la firma de
+# Meta/Kapso, encola cada evento en Cloud Tasks y sirve la página de
+# onboarding. Solo instala las dependencias base de pyproject.toml: nada de
+# google-adk, pandas ni matplotlib, para que la imagen sea chica y el
+# arranque en frío rápido. tests/test_service_boundaries.py vigila que el
+# código del webhook no los importe.
+#
+# Python 3.11 fijo a propósito: fireo (lo usa el onboarding) solo declara
+# soporte hasta 3.11.
+FROM python:3.11-slim
+
+COPY --from=ghcr.io/astral-sh/uv:0.8.11 /uv /usr/local/bin/uv
+
+ENV UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy
+
+WORKDIR /app
+
+COPY pyproject.toml uv.lock .python-version ./
+RUN uv sync --frozen --no-default-groups
+
+COPY app ./app
+
+ENV PATH="/app/.venv/bin:$PATH" \
+    PORT=8080
+
+CMD exec uvicorn app.services.webhook_entry:app --host 0.0.0.0 --port ${PORT} --workers 1 --timeout-graceful-shutdown 8

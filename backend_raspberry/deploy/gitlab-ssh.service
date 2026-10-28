@@ -1,0 +1,16 @@
+[Unit]
+Description=Conexión SSH de la Raspberry hacia GitLab (deploy key)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=__USER__
+EnvironmentFile=-/etc/raspberry-backend.env
+ExecStart=/usr/local/bin/setup-gitlab-ssh
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target

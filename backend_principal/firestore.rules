@@ -1,0 +1,23 @@
+rules_version = '2';
+
+// Reglas de la base `j2ys-tech-core` (proyecto j2ys-tech-chat-automation).
+//
+// Copia versionada de las reglas ACTIVAS (verificadas el 2026-10-07 con la
+// API de Firebase Rules): ningún cliente (SDK web/móvil) puede leer ni
+// escribir NADA. El backend no pasa por estas reglas: usa la cuenta de
+// servicio de Cloud Run con IAM (Admin/Server SDK).
+//
+// Esto protege en especial `whatsapp_credentials`, que guarda tokens de
+// Meta en texto plano durante el experimento (ver
+// app/firestore_db/firebase_schemas.py::WhatsappCredentials).
+//
+// TODO(seguridad): si algún día una app cliente necesita leer Firestore,
+// abrir SOLO las colecciones necesarias y dejar `whatsapp_credentials`
+// siempre en `if false`.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

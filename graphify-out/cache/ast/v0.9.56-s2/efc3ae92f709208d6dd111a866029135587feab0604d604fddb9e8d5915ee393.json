@@ -1,0 +1,1 @@
+{"nodes": [{"id": "$graphify-root$_backend_principal_app_ai_ai_restaurant_admin_prompt_restaurant_admin_agent_prompt_py", "label": "restaurant_admin_agent_prompt.py", "file_type": "code", "source_file": "backend_principal/app/ai/ai_restaurant/admin/prompt/restaurant_admin_agent_prompt.py", "source_location": "L1"}], "edges": [], "raw_calls": []}

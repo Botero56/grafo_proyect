@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuración del negocio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page config-page">
+    <header class="topbar">
+      <a class="brand brand-link" href="index.html">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <circle cx="12" cy="18" r="7.2"></circle>
+          <circle cx="20" cy="10" r="7.2"></circle>
+        </svg>
+        <div>
+          <h1>Configuración del negocio</h1>
+          <p class="subtitle">Bot de WhatsApp para restaurantes</p>
+        </div>
+      </a>
+      <div class="topbar-right">
+        <div class="user-chip">
+          <div class="avatar" id="user-avatar">S</div>
+          <span id="user-name">Rol: superadmin</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="config-layout">
+      <nav class="config-nav" aria-label="Secciones de la configuración">
+        <a href="#sec-general" data-nav="general">General<span class="nav-dot" hidden><span class="sr-only"> (cambios sin guardar)</span></span></a>
+        <a href="#sec-plan" data-nav="plan">Plan<span class="nav-dot" hidden><span class="sr-only"> (cambios sin guardar)</span></span></a>
+        <a href="#sec-accesos" data-nav="accesos">Accesos<span class="nav-dot" hidden><span class="sr-only"> (cambios sin guardar)</span></span></a>
+        <a href="#sec-productos">Productos fijos</a>
+        <a href="#sec-recordatorio" data-nav="recordatorio">Recordatorio<span class="nav-dot" hidden><span class="sr-only"> (cambios sin guardar)</span></span></a>
+        <a href="#sec-domicilios" data-nav="domicilios">Domicilios<span class="nav-dot" hidden><span class="sr-only"> (cambios sin guardar)</span></span></a>
+        <a href="#sec-pagos" data-nav="pagos">Pagos<span class="nav-dot" hidden><span class="sr-only"> (cambios sin guardar)</span></span></a>
+        <a href="#sec-comandas" data-nav="comandas">Comandas<span class="nav-dot" hidden><span class="sr-only"> (cambios sin guardar)</span></span></a>
+        <a href="#sec-integraciones" data-nav="integraciones" data-superadmin hidden>Integraciones<span class="nav-dot" hidden><span class="sr-only"> (cambios sin guardar)</span></span></a>
+      </nav>
+
+      <main class="config-main">
+        <!-- Carga -->
+        <div id="state-loading" aria-busy="true" aria-label="Cargando configuración">
+          <div class="skeleton skeleton--hero"></div>
+          <div class="skeleton skeleton--card"></div>
+          <div class="skeleton skeleton--card"></div>
+        </div>
+
+        <!-- Error -->
+        <div id="state-error" class="card state-error" role="alert" hidden>
+          <h2>No se pudo cargar la configuración</h2>
+          <p id="state-error-text" class="hint"></p>
+          <button type="button" class="btn-primary btn-inline" data-action="retry">Reintentar</button>
+        </div>
+
+        <div id="state-ready" hidden>
+          <!-- Estado del bot: lo primero que hay que ver -->
+          <section class="biz-hero" aria-live="polite">
+            <p class="biz-name" id="hero-name"></p>
+            <div class="biz-meta">
+              <p class="biz-status" id="hero-status"><span class="biz-status-dot"></span><span id="hero-status-text"></span></p>
+              <a class="biz-plan" id="hero-plan" href="#sec-plan"></a>
+            </div>
+            <!-- Señal del bot: late mientras atiende, plana si está pausado -->
+            <div class="signal" aria-hidden="true">
+              <svg viewBox="0 0 600 58" preserveAspectRatio="none">
+                <path class="signal-flat" d="M0 30 H600" />
+                <path class="signal-live" d="M0 30 H58 L66 24 L74 36 L82 8 L90 50 L98 30 H150 H208 L216 24 L224 36 L232 8 L240 50 L248 30 H300 H358 L366 24 L374 36 L382 8 L390 50 L398 30 H450 H508 L516 24 L524 36 L532 8 L540 50 L548 30 H600 H658 L666 24 L674 36 L682 8 L690 50 L698 30 H750 H808 L816 24 L824 36 L832 8 L840 50 L848 30 H900 H958 L966 24 L974 36 L982 8 L990 50 L998 30 H1050 H1108 L1116 24 L1124 36 L1132 8 L1140 50 L1148 30 H1200" />
+              </svg>
+            </div>
+          </section>
+
+          <!-- 1. General -->
+          <section id="sec-general" class="config-section" data-section="general" aria-labelledby="h-general">
+            <header class="section-head">
+              <div>
+                <h2 id="h-general">General</h2>
+                <p class="hint">Cómo se presenta el bot y si está atendiendo.</p>
+              </div>
+              <span class="dirty-flag" hidden>Cambios sin guardar</span>
+            </header>
+            <div class="field">
+              <label for="f-nombre-comercial">Nombre comercial</label>
+              <input type="text" id="f-nombre-comercial" data-path="configuracion.general.nombre_comercial" maxlength="80" aria-describedby="help-nombre-comercial err-nombre-comercial" />
+              <p class="field-help" id="help-nombre-comercial">Si está vacío se usa el nombre del negocio.</p>
+              <p class="field-error" id="err-nombre-comercial" data-error-for="configuracion.general.nombre_comercial" hidden></p>
+            </div>
+            <div class="field field--inline">
+              <label class="switch-label" for="f-status">
+                <input type="checkbox" role="switch" class="switch" id="f-status" data-path="negocio.status" />
+                <span>Bot <strong id="status-label">activo</strong></span>
+              </label>
+              <p class="field-help">Si lo desactivas, el bot deja de responder a todos los clientes.</p>
+            </div>
+            <footer class="section-actions">
+              <button type="button" class="btn-secondary" data-action="discard">Descartar cambios</button>
+              <button type="button" class="btn-primary btn-inline" data-action="save">Guardar</button>
+            </footer>
+          </section>
+
+          <!-- Plan comercial: el backend bloquea lo que no incluye -->
+          <section id="sec-plan" class="config-section" data-section="plan" aria-labelledby="h-plan">
+            <header class="section-head">
+              <div>
+                <h2 id="h-plan">Plan</h2>
+                <p class="hint">Lo que el negocio paga y lo que el bot hace por él. El cambio aplica apenas lo guardas.</p>
+              </div>
+              <span class="dirty-flag" hidden>Cambios sin guardar</span>
+            </header>
+            <fieldset class="plan-picker">
+              <legend class="sr-only">Plan del negocio</legend>
+              <div class="table-scroll">
+                <table class="plan-table" id="plan-table">
+                  <thead>
+                    <tr>
+                      <td></td>
+                      <th scope="col" data-col="basico">
+                        <label><input type="radio" name="plan" value="basico" data-path="negocio.plan" />
+                          <span class="plan-name">Básico</span><span class="plan-price">$350.000 al mes</span></label>
+                      </th>
+                      <th scope="col" data-col="avanzado">
+                        <label><input type="radio" name="plan" value="avanzado" data-path="negocio.plan" />
+                          <span class="plan-name">Avanzado</span><span class="plan-price">$450.000 al mes</span></label>
+                      </th>
+                      <th scope="col" data-col="premium">
+                        <label><input type="radio" name="plan" value="premium" data-path="negocio.plan" />
+                          <span class="plan-name">Premium</span><span class="plan-price">$550.000 al mes</span></label>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">Bot de clientes: pedidos, menú, catálogo y audios</th><td data-col="basico" class="yes">Incluido</td><td data-col="avanzado" class="yes">Incluido</td><td data-col="premium" class="yes">Incluido</td></tr>
+                    <tr><th scope="row">IA del administrador: menú por foto, stock, cierre del día</th><td data-col="basico" class="yes">Incluido</td><td data-col="avanzado" class="yes">Incluido</td><td data-col="premium" class="yes">Incluido</td></tr>
+                    <tr><th scope="row">Domicilios por zona y pago en efectivo</th><td data-col="basico" class="yes">Incluido</td><td data-col="avanzado" class="yes">Incluido</td><td data-col="premium" class="yes">Incluido</td></tr>
+                    <tr><th scope="row">Transferencias</th><td data-col="basico">Las confirma una persona</td><td data-col="avanzado">El bot lee el comprobante</td><td data-col="premium">El bot lee el comprobante</td></tr>
+                    <tr><th scope="row">Impresora de comandas</th><td data-col="basico" class="no">No incluido</td><td data-col="avanzado">Opcional, $350.000 con instalación</td><td data-col="premium">Opcional, $350.000 con instalación</td></tr>
+                    <tr><th scope="row">Domiciliarios, liquidación y cierre diario</th><td data-col="basico" class="no">No incluido</td><td data-col="avanzado" class="no">No incluido</td><td data-col="premium" class="yes">Incluido</td></tr>
+                    <tr><th scope="row">Estadísticas, consultas de pedidos y Excel</th><td data-col="basico" class="no">No incluido</td><td data-col="avanzado" class="no">No incluido</td><td data-col="premium" class="yes">Incluido</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </fieldset>
+            <p class="field-help">Instalación: $200.000 en todos los planes. La impresora es opcional en Avanzado y Premium y se cobra aparte: $350.000 con su instalación. Los pedidos se guardan siempre; al subir de plan el historial ya está.</p>
+            <footer class="section-actions">
+              <button type="button" class="btn-secondary" data-action="discard">Descartar cambios</button>
+              <button type="button" class="btn-primary btn-inline" data-action="save">Guardar</button>
+            </footer>
+          </section>
+
+          <!-- 2. Accesos -->
+          <section id="sec-accesos" class="config-section" data-section="accesos" aria-labelledby="h-accesos">
+            <header class="section-head">
+              <div>
+                <h2 id="h-accesos">Accesos</h2>
+                <p class="hint">Quién administra el bot por WhatsApp y quién recibe los avisos.</p>
+              </div>
+              <span class="dirty-flag" hidden>Cambios sin guardar</span>
+            </header>
+            <fieldset class="field">
+              <legend>Números de administración</legend>
+              <ul class="phone-list" id="admin-list"></ul>
+              <p class="field-error" data-error-for="configuracion.accesos.admin_phone_numbers" hidden></p>
+              <label class="sr-only" for="f-admin-new">Nuevo número de administración</label>
+              <div class="add-row">
+                <input type="tel" id="f-admin-new" inputmode="numeric" placeholder="573001234567" autocomplete="off" aria-describedby="err-admin-new help-admin-new" />
+                <button type="button" class="btn-secondary" data-action="add-admin">Agregar</button>
+              </div>
+              <p class="field-help" id="help-admin-new">57 seguido de 10 dígitos, sin + ni espacios.</p>
+              <p class="field-error" id="err-admin-new" hidden></p>
+            </fieldset>
+            <div class="field-grid">
+              <div class="field">
+                <label for="f-encargada-nombre">Nombre de la encargada</label>
+                <input type="text" id="f-encargada-nombre" data-path="configuracion.accesos.encargada.nombre" placeholder="la administradora" aria-describedby="err-encargada-nombre" />
+                <p class="field-error" id="err-encargada-nombre" data-error-for="configuracion.accesos.encargada.nombre" hidden></p>
+              </div>
+            </div>
+            <footer class="section-actions">
+              <button type="button" class="btn-secondary" data-action="discard">Descartar cambios</button>
+              <button type="button" class="btn-primary btn-inline" data-action="save">Guardar</button>
+            </footer>
+          </section>
+
+          <!-- 3. Productos fijos (cada producto se guarda al confirmar su ventana) -->
+          <section id="sec-productos" class="config-section" aria-labelledby="h-productos">
+            <header class="section-head">
+              <div>
+                <h2 id="h-productos">Productos fijos</h2>
+                <p class="hint">Lo que el bot ofrece siempre. Cada cambio se guarda al confirmarlo.</p>
+              </div>
+              <button type="button" class="btn-secondary" data-action="add-producto">Agregar producto</button>
+            </header>
+            <div id="productos-body"></div>
+          </section>
+
+          <!-- Recordatorio al admin -->
+          <section id="sec-recordatorio" class="config-section" data-section="recordatorio" aria-labelledby="h-recordatorio">
+            <header class="section-head">
+              <div>
+                <h2 id="h-recordatorio">Recordatorio del menú</h2>
+                <p class="hint">Lo que el bot le escribe al administrador si a esa hora todavía no hay menú del día.</p>
+              </div>
+              <span class="dirty-flag" hidden>Cambios sin guardar</span>
+            </header>
+            <div class="field">
+              <label for="f-recordatorio-hora">Hora del recordatorio</label>
+              <input type="time" id="f-recordatorio-hora" data-path="configuracion.recordatorio.hora" />
+              <p class="field-help">Vacía = no se envía recordatorio (por ejemplo, si el negocio solo usa carta fija).</p>
+            </div>
+            <div class="field">
+              <label for="f-recordatorio-texto">Mensaje</label>
+              <textarea id="f-recordatorio-texto" rows="2" maxlength="300" data-path="configuracion.recordatorio.texto" placeholder="aún no tengo el menú de hoy, envíame la foto por este chat" aria-describedby="help-recordatorio-texto"></textarea>
+              <p class="field-help" id="help-recordatorio-texto">Sale así: «Hola, te escribe tu asistente de pedidos: <em>tu mensaje</em>. Responde a este mensaje cuando lo tengas listo.» Vacío = el texto de ejemplo.</p>
+            </div>
+            <footer class="section-actions">
+              <button type="button" class="btn-secondary" data-action="discard">Descartar cambios</button>
+              <button type="button" class="btn-primary btn-inline" data-action="save">Guardar</button>
+            </footer>
+          </section>
+
+          <!-- 4. Domicilios -->
+          <section id="sec-domicilios" class="config-section" data-section="domicilios" aria-labelledby="h-domicilios">
+            <header class="section-head">
+              <div>
+                <h2 id="h-domicilios">Domicilios</h2>
+                <p class="hint">Las direcciones que no coincidan con ninguna zona las cotiza una persona.</p>
+              </div>
+              <span class="dirty-flag" hidden>Cambios sin guardar</span>
+            </header>
+            <div class="field">
+              <label for="f-hora-cierre">Hora de cierre de domicilios</label>
+              <input type="time" id="f-hora-cierre" data-path="configuracion.domicilios.hora_cierre" data-requires="domiciliarios" aria-describedby="help-hora-cierre err-hora-cierre" />
+              <p class="field-help" id="help-hora-cierre">A esta hora lo que nadie liquidó queda como no liquidado y la administración recibe el cierre del día. Vacía = no se hace cierre.</p>
+              <p class="plan-note" data-missing="domiciliarios" hidden>El cierre diario viene con el plan <a href="#sec-plan">Premium</a>. Mientras tanto no se envía.</p>
+              <p class="field-error" id="err-hora-cierre" data-error-for="configuracion.domicilios.hora_cierre" hidden></p>
+            </div>
+            <div class="field">
+              <label for="f-tiempo-entrega">Tiempo de entrega estimado (minutos)</label>
+              <input type="number" id="f-tiempo-entrega" min="1" max="600" step="1" inputmode="numeric" data-path="configuracion.domicilios.tiempo_entrega_min" aria-describedby="help-tiempo-entrega err-tiempo-entrega" />
+              <p class="field-help" id="help-tiempo-entrega">Pasado este tiempo sin reclamo del cliente, el pedido se da por entregado. Vacío = nunca se da por entregado solo.</p>
+              <p class="field-error" id="err-tiempo-entrega" data-error-for="configuracion.domicilios.tiempo_entrega_min" hidden></p>
+            </div>
+            <div id="zonas-body"></div>
+            <button type="button" class="btn-secondary btn-add" data-action="add-zona">Agregar zona</button>
+            <footer class="section-actions">
+              <button type="button" class="btn-secondary" data-action="discard">Descartar cambios</button>
+              <button type="button" class="btn-primary btn-inline" data-action="save">Guardar</button>
+            </footer>
+          </section>
+
+          <!-- 5. Pagos -->
+          <section id="sec-pagos" class="config-section" data-section="pagos" aria-labelledby="h-pagos">
+            <header class="section-head">
+              <div>
+                <h2 id="h-pagos">Pagos</h2>
+                <p class="hint">Cuentas que el bot comparte cuando un cliente paga por transferencia.</p>
+              </div>
+              <span class="dirty-flag" hidden>Cambios sin guardar</span>
+            </header>
+            <p class="plan-note" data-missing="comprobante_auto" hidden>En el plan Básico el bot no lee el comprobante: le avisa a la administración y una persona confirma si llegó la plata. Con <a href="#sec-plan">Avanzado</a> lo valida solo.</p>
+            <ul class="account-list" id="cuentas-body"></ul>
+            <button type="button" class="btn-secondary btn-add" data-action="add-cuenta">Agregar cuenta</button>
+            <footer class="section-actions">
+              <button type="button" class="btn-secondary" data-action="discard">Descartar cambios</button>
+              <button type="button" class="btn-primary btn-inline" data-action="save">Guardar</button>
+            </footer>
+          </section>
+
+          <!-- 6. Comandas -->
+          <section id="sec-comandas" class="config-section" data-section="comandas" aria-labelledby="h-comandas">
+            <header class="section-head">
+              <div>
+                <h2 id="h-comandas">Comandas</h2>
+                <p class="hint">A dónde llegan los pedidos confirmados.</p>
+              </div>
+              <span class="dirty-flag" hidden>Cambios sin guardar</span>
+            </header>
+            <fieldset class="field radio-group">
+              <legend>Enviar comandas a</legend>
+              <label><input type="radio" name="destino" value="impresora" data-path="configuracion.comandas.destino" data-requires="impresora" /> Impresora</label>
+              <label><input type="radio" name="destino" value="chat_admin" data-path="configuracion.comandas.destino" /> Chat de administración</label>
+            </fieldset>
+            <p class="plan-note" data-missing="impresora" hidden>La impresora viene con los planes <a href="#sec-plan">Avanzado y Premium</a>. En este plan las comandas llegan al chat de administración, aunque haya una impresora configurada.</p>
+            <div id="printer-fields" class="printer-fields" hidden>
+              <div class="field">
+                <label for="f-printer-url">URL de la impresora</label>
+                <input type="url" id="f-printer-url" data-path="configuracion.comandas.impresora.endpoint_url" placeholder="https://" aria-describedby="err-printer-url" />
+                <p class="field-error" id="err-printer-url" data-error-for="configuracion.comandas.impresora.endpoint_url" hidden></p>
+              </div>
+              <div class="field">
+                <label for="f-printer-ancho">Ancho del papel</label>
+                <select id="f-printer-ancho" data-path="configuracion.comandas.impresora.ancho" aria-describedby="err-printer-ancho">
+                  <option value="58mm">58mm</option>
+                  <option value="80mm">80mm</option>
+                </select>
+                <p class="field-error" id="err-printer-ancho" data-error-for="configuracion.comandas.impresora.ancho" hidden></p>
+              </div>
+              <div class="field">
+                <label for="f-printer-token">Token de la impresora</label>
+                <input type="password" id="f-printer-token" autocomplete="off" data-path="configuracion.comandas.impresora.token" aria-describedby="hint-printer-token err-printer-token" />
+                <p class="hint" id="hint-printer-token">Se guarda en Secret Manager y no se vuelve a mostrar. Déjalo vacío para conservar el actual.</p>
+                <p class="field-error" id="err-printer-token" data-error-for="configuracion.comandas.impresora.token" hidden></p>
+              </div>
+              <div class="device-row">
+                <p class="hint">Raspberry: <strong id="printer-version" aria-live="polite">—</strong></p>
+                <div class="device-actions">
+                  <button type="button" class="btn-secondary" data-action="test-print">Imprimir prueba</button>
+                  <button type="button" class="btn-secondary" data-action="update-raspberry">Actualizar Raspberry</button>
+                </div>
+              </div>
+              <ul class="device-list" id="printer-devices" aria-live="polite"></ul>
+              <details class="device-history" open>
+                <summary>Historial de la Raspberry</summary>
+                <ul class="event-list" id="printer-events"></ul>
+              </details>
+              <fieldset class="field">
+                <legend>Wi-Fi del negocio</legend>
+                <p class="hint">Se guarda en la Raspberry sin cambiarla de red. Al apagar el hotspot del equipo entra sola a este Wi-Fi; si la clave está mal, vuelve al hotspot.</p>
+                <div class="field">
+                  <label for="f-wifi-ssid">Nombre del Wi-Fi</label>
+                  <input type="text" id="f-wifi-ssid" maxlength="32" autocomplete="off" spellcheck="false" />
+                </div>
+                <div class="field">
+                  <label for="f-wifi-password">Clave del Wi-Fi</label>
+                  <input type="password" id="f-wifi-password" maxlength="63" autocomplete="new-password" />
+                </div>
+                <div class="device-row">
+                  <button type="button" class="btn-secondary" data-action="save-wifi">Guardar Wi-Fi en la Raspberry</button>
+                </div>
+              </fieldset>
+            </div>
+            <footer class="section-actions">
+              <button type="button" class="btn-secondary" data-action="discard">Descartar cambios</button>
+              <button type="button" class="btn-primary btn-inline" data-action="save">Guardar</button>
+            </footer>
+          </section>
+
+          <!-- 7. Integraciones (solo superadmin) -->
+          <section id="sec-integraciones" class="config-section" data-section="integraciones" data-superadmin hidden aria-labelledby="h-integraciones">
+            <header class="section-head">
+              <div>
+                <h2 id="h-integraciones">Integraciones</h2>
+                <p class="hint">Conexión con Meta. Solo la ve el rol superadmin.</p>
+              </div>
+              <span class="dirty-flag" hidden>Cambios sin guardar</span>
+            </header>
+            <div class="field">
+              <label for="f-phone-id">ID del número de WhatsApp (phone number ID)</label>
+              <div class="add-row">
+                <input type="text" id="f-phone-id" inputmode="numeric" class="mono" data-path="negocio.whatsapp_phone_number_id" readonly aria-describedby="err-phone-id" />
+                <button type="button" class="btn-secondary" data-action="unlock-phone-id" id="unlock-phone-id">Editar</button>
+              </div>
+              <p class="field-error" id="err-phone-id" data-error-for="negocio.whatsapp_phone_number_id" hidden></p>
+            </div>
+            <div class="field">
+              <label for="f-vertical">Tipo de negocio</label>
+              <select id="f-vertical" data-path="negocio.bussiness_vertical" aria-describedby="err-vertical">
+                <option value="restaurant">Restaurante</option>
+                <option value="cafe" disabled>Cafetería (Próximamente)</option>
+                <option value="bakery" disabled>Panadería (Próximamente)</option>
+                <option value="retail" disabled>Tienda (Próximamente)</option>
+              </select>
+              <p class="field-error" id="err-vertical" data-error-for="negocio.bussiness_vertical" hidden></p>
+            </div>
+            <footer class="section-actions">
+              <button type="button" class="btn-secondary" data-action="discard">Descartar cambios</button>
+              <button type="button" class="btn-primary btn-inline" data-action="save">Guardar</button>
+            </footer>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Confirmación genérica -->
+  <dialog id="confirm-dialog" class="modal" aria-labelledby="confirm-title" aria-describedby="confirm-message">
+    <form method="dialog">
+      <h2 id="confirm-title"></h2>
+      <p id="confirm-message" class="hint"></p>
+      <div class="modal-actions">
+        <button type="submit" value="cancel" class="btn-secondary">Cancelar</button>
+        <button type="submit" value="confirm" class="btn-primary btn-inline" id="confirm-ok"></button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Zona -->
+  <dialog id="zona-dialog" class="modal" aria-labelledby="zona-title">
+    <form id="zona-form" novalidate>
+      <h2 id="zona-title">Zona</h2>
+      <div class="field">
+        <label for="z-nombre">Nombre</label>
+        <input type="text" id="z-nombre" name="nombre" aria-describedby="zerr-nombre" />
+        <p class="field-error" id="zerr-nombre" data-error-for="nombre" hidden></p>
+      </div>
+      <div class="field">
+        <label for="z-tarifa">Tarifa (COP)</label>
+        <input type="text" id="z-tarifa" name="tarifa" inputmode="numeric" placeholder="3000" aria-describedby="zerr-tarifa" />
+        <p class="field-error" id="zerr-tarifa" data-error-for="tarifa" hidden></p>
+      </div>
+      <div class="field">
+        <label for="z-alias">Alias</label>
+        <div class="chips" id="z-chips">
+          <input type="text" id="z-alias" autocomplete="off" aria-describedby="zhelp-alias zerr-alias" />
+        </div>
+        <p class="field-help" id="zhelp-alias">Otras formas de escribir el barrio. Enter o coma para agregar; 4 caracteres o más.</p>
+        <p class="field-error" id="zerr-alias" data-error-for="alias" hidden></p>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" data-close>Cancelar</button>
+        <button type="submit" class="btn-primary btn-inline">Aceptar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Cuenta -->
+  <dialog id="cuenta-dialog" class="modal" aria-labelledby="cuenta-title">
+    <form id="cuenta-form" novalidate>
+      <h2 id="cuenta-title">Cuenta</h2>
+      <div class="field-grid">
+        <div class="field">
+          <label for="c-banco">Banco</label>
+          <select id="c-banco" name="banco" aria-describedby="cerr-banco">
+            <option value="">Elige…</option>
+            <option>Bancolombia</option>
+            <option>Nequi</option>
+            <option>Daviplata</option>
+            <option>Davivienda</option>
+            <option>BBVA</option>
+            <option>Banco de Bogotá</option>
+            <option>Otro</option>
+          </select>
+          <p class="field-error" id="cerr-banco" data-error-for="banco" hidden></p>
+        </div>
+        <div class="field">
+          <label for="c-tipo">Tipo</label>
+          <select id="c-tipo" name="tipo" aria-describedby="cerr-tipo">
+            <option value="">Elige…</option>
+            <option value="ahorros">Ahorros</option>
+            <option value="corriente">Corriente</option>
+            <option value="billetera">Billetera</option>
+          </select>
+          <p class="field-error" id="cerr-tipo" data-error-for="tipo" hidden></p>
+        </div>
+      </div>
+      <div class="field">
+        <label for="c-numero">Número</label>
+        <input type="text" id="c-numero" name="numero" inputmode="numeric" autocomplete="off" class="mono" aria-describedby="cerr-numero" />
+        <p class="field-error" id="cerr-numero" data-error-for="numero" hidden></p>
+      </div>
+      <div class="field">
+        <label for="c-titular">Titular</label>
+        <input type="text" id="c-titular" name="titular" aria-describedby="cerr-titular" />
+        <p class="field-error" id="cerr-titular" data-error-for="titular" hidden></p>
+      </div>
+      <div class="field">
+        <label for="c-llave">Llave (opcional)</label>
+        <input type="text" id="c-llave" name="llave" autocomplete="off" />
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" data-close>Cancelar</button>
+        <button type="submit" class="btn-primary btn-inline">Aceptar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Producto -->
+  <dialog id="producto-dialog" class="modal" aria-labelledby="producto-title">
+    <form id="producto-form" novalidate>
+      <h2 id="producto-title">Producto</h2>
+      <div class="field">
+        <label for="p-nombre">Nombre</label>
+        <input type="text" id="p-nombre" name="nombre" aria-describedby="perr-nombre" />
+        <p class="field-error" id="perr-nombre" data-error-for="nombre" hidden></p>
+      </div>
+      <div class="field">
+        <label for="p-descripcion">Descripción (opcional)</label>
+        <input type="text" id="p-descripcion" name="descripcion" />
+      </div>
+      <div class="field">
+        <label for="p-categoria">Categoría</label>
+        <input type="text" id="p-categoria" name="categoria" placeholder="Bebidas" />
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="p-tipo">Tipo de precio</label>
+          <select id="p-tipo" name="tipo_precio">
+            <option value="fijo">Fijo</option>
+            <option value="no_legible">No legible</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="p-precio">Precio (COP)</label>
+          <input type="text" id="p-precio" name="precio" inputmode="numeric" placeholder="25000" aria-describedby="perr-precio" />
+          <p class="field-error" id="perr-precio" data-error-for="precio" hidden></p>
+        </div>
+      </div>
+      <div class="field field--inline">
+        <label class="switch-label" for="p-activo">
+          <input type="checkbox" role="switch" class="switch" id="p-activo" name="is_active" />
+          <span>Activo</span>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" data-close>Cancelar</button>
+        <button type="submit" class="btn-primary btn-inline">Guardar producto</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden>
+    <span class="toast-dot"></span>
+    <span id="toast-text"></span>
+  </div>
+
+  <script type="module" src="configuracion.js"></script>
+</body>
+</html>

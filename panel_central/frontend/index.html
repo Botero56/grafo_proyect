@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Central</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="12" cy="18" r="7.2"></circle>
+          <circle cx="20" cy="10" r="7.2"></circle>
+        </svg>
+        <div>
+          <h1>Panel Central de Clientes</h1>
+          <p class="subtitle">Uso interno · Equipo de IA</p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <a href="configuracion.html">Configuración</a>
+        <div id="connection-status" class="status-pill status-pill--pending">
+          <span class="status-dot"></span>
+          <span id="connection-status-text">Conectando al backend…</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="layout">
+      <section class="card form-card">
+        <h2>Registrar negocio</h2>
+        <p class="hint">Crea el negocio con su configuración vacía. Después la completas en Configuración.</p>
+        <form id="client-form">
+          <div class="field">
+            <label for="name">Nombre del negocio</label>
+            <input type="text" id="name" name="name" maxlength="80" placeholder="Ej. Deliperritos" required />
+          </div>
+
+          <div class="field">
+            <label for="legal_name">Razón social</label>
+            <input type="text" id="legal_name" name="legal_name" maxlength="120" placeholder="Ej. Deliperritos S.A.S." required />
+          </div>
+
+          <div class="field">
+            <label for="bussiness_vertical">Tipo de negocio</label>
+            <select id="bussiness_vertical" name="bussiness_vertical">
+              <option value="restaurant">Restaurante</option>
+            </select>
+            <p class="field-help">No se puede cambiar después del alta.</p>
+          </div>
+
+          <div class="field">
+            <label for="plan">Plan</label>
+            <select id="plan" name="plan" required aria-describedby="help-plan">
+              <option value="">Elige…</option>
+              <option value="basico">Básico, $350.000 al mes</option>
+              <option value="avanzado">Avanzado, $450.000 al mes</option>
+              <option value="premium">Premium, $550.000 al mes</option>
+            </select>
+            <p class="field-help" id="help-plan">Se puede cambiar después en Configuración. Lo que incluye cada uno está en la sección Plan.</p>
+          </div>
+
+          <div class="field">
+            <label for="phone">Teléfono de contacto</label>
+            <input type="tel" id="phone" name="phone" placeholder="Ej. 3001234567" required />
+          </div>
+
+          <div class="field">
+            <label for="address">Dirección del local</label>
+            <input type="text" id="address" name="address" maxlength="200" placeholder="Opcional" />
+          </div>
+
+          <div class="field">
+            <label for="whatsapp_phone_number">Número de WhatsApp del bot</label>
+            <input type="tel" id="whatsapp_phone_number" name="whatsapp_phone_number" placeholder="Ej. 573001234567" required />
+          </div>
+
+          <div class="field">
+            <label for="whatsapp_phone_number_id">ID del número (phone_number_id)</label>
+            <input type="text" id="whatsapp_phone_number_id" name="whatsapp_phone_number_id" inputmode="numeric" pattern="\d{5,30}" title="Solo dígitos (5 a 30)" required />
+            <p class="field-help">Solo dígitos. Sin él, el bot no recibe los mensajes de ese número.</p>
+          </div>
+
+          <div>
+            <div class="field">
+              <label for="kapso_api_key">API key de Kapso</label>
+              <input type="password" id="kapso_api_key" name="kapso_api_key" autocomplete="off" minlength="16" placeholder="Opcional, se puede cargar después" />
+            </div>
+            <div class="field">
+              <label for="kapso_webhook_secret">Secreto del webhook de Kapso</label>
+              <input type="password" id="kapso_webhook_secret" name="kapso_webhook_secret" autocomplete="off" minlength="16" placeholder="Opcional, se puede cargar después" />
+              <p class="field-help">Mínimo 16 caracteres. Se guardan cifrados y no se vuelven a mostrar.</p>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5"></path>
+            </svg>
+            Registrar negocio
+          </button>
+          <p id="form-message" class="form-message" role="alert"></p>
+        </form>
+        <div id="create-result" class="create-result" hidden></div>
+      </section>
+
+      <section class="card table-card">
+        <div class="table-head">
+          <div class="table-head-left">
+            <h2>Negocios</h2>
+            <span id="count-badge" class="count-badge">0</span>
+          </div>
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="search" id="search-input" placeholder="Buscar por nombre o número…" />
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table id="clients-table">
+            <thead>
+              <tr>
+                <th>
+                  <button type="button" id="sort-nombre" class="sortable">
+                    Nombre
+                    <svg class="sort-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 9l6 6 6-6"></path>
+                    </svg>
+                  </button>
+                </th>
+                <th>WhatsApp</th>
+                <th>Plan</th>
+                <th>Bot</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="clients-tbody">
+              <tr class="empty-row">
+                <td colspan="5">Cargando negocios…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" hidden>
+    <span class="toast-dot"></span>
+    <span id="toast-text"></span>
+  </div>
+
+  <!-- El frontend habla con el backend en Python (FastAPI), no con Firebase directamente -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+*.sh text eol=lf
+# Fuera del paquete de despliegue (ops/deploy.sh usa git archive).
+loadtest_results/ export-ignore
+loadtest/ export-ignore

@@ -1,0 +1,68 @@
+# Entorno local completo: los dos servicios con sus imágenes reales y el
+# emulador de Cloud Tasks en medio, igual que en producción (Cloud Run +
+# Cloud Tasks). En producción NO se usa compose: ver cloudbuild.yaml.
+#
+#   docker compose up --build
+#
+#   webhook  -> http://localhost:8080   (POST /webhook, /webhook/kapso/{clave})
+#   worker   -> http://localhost:8081   (/tasks/*, /api/v1/admin/*)
+#
+# Firestore y Vertex AI son los reales (no hay emulador de fireo/ADK): se
+# monta el archivo de Application Default Credentials del host. Define su
+# ruta en .env (compose lo lee para interpolar), por ejemplo:
+#   Windows: GOOGLE_ADC_FILE=C:/Users/<tu-usuario>/AppData/Roaming/gcloud/application_default_credentials.json
+#   Linux/macOS: GOOGLE_ADC_FILE=/home/<tu-usuario>/.config/gcloud/application_default_credentials.json
+# (se genera con `gcloud auth application-default login`).
+#
+# Para recibir mensajes reales de Meta, expón el webhook con un túnel
+# (p. ej. `ngrok http 8080`) y apunta la URL del webhook de la app a él.
+
+x-app: &app
+  env_file: .env
+  volumes:
+    - ${GOOGLE_ADC_FILE:?Define GOOGLE_ADC_FILE en .env (ver docker-compose.yml)}:/gcloud/adc.json:ro
+  restart: unless-stopped
+
+x-app-env: &app-env
+  GOOGLE_APPLICATION_CREDENTIALS: /gcloud/adc.json
+  CLOUD_TASKS_EMULATOR_HOST: cloudtasks:8123
+  # El emulador invoca al worker por la red de compose.
+  WORKER_URL: http://worker:8080
+  # Sin OIDC contra el emulador (en Cloud Run lo exige el worker privado).
+  WORKER_SERVICE_ACCOUNT_EMAIL: ""
+
+services:
+  webhook:
+    <<: *app
+    build:
+      context: .
+      dockerfile: Dockerfile.webhook
+    image: j2ys-webhook:local
+    environment:
+      <<: *app-env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - cloudtasks
+
+  worker:
+    <<: *app
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    image: j2ys-worker:local
+    environment:
+      <<: *app-env
+    ports:
+      - "8081:8080"
+    depends_on:
+      - cloudtasks
+
+  cloudtasks:
+    # github.com/aertje/cloud-tasks-emulator. Las colas las crea la app al
+    # primer encolado (cloud_tasks_client._ensure_queue_in_emulator).
+    image: ghcr.io/aertje/cloud-tasks-emulator:1.2.0
+    command: ["-host", "0.0.0.0", "-port", "8123"]
+    ports:
+      - "8123:8123"
+    restart: unless-stopped

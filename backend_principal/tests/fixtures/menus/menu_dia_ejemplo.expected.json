@@ -1,0 +1,23 @@
+{
+  "menu_del_dia": {
+    "nombre": "Pollo al curry con champiñones",
+    "precio": 18500,
+    "tipo_precio": "fijo"
+  },
+  "acompanamientos": [
+    { "nombre": "Sopa", "opciones": ["Ajiaco", "Frijoles"] },
+    { "nombre": "Torta de queso", "opciones": [] },
+    { "nombre": "Arroz", "opciones": [] },
+    { "nombre": "Ensalada", "opciones": [] },
+    { "nombre": "Bebida", "opciones": [] }
+  ],
+  "otras_opciones": {
+    "proteinas": ["Cerdo", "Chicharrón", "Pollo", "Res"],
+    "precio": 20500,
+    "tipo_precio": "fijo"
+  },
+  "envios": true,
+  "telefono_contacto": "3235099092",
+  "fecha_detectada": null,
+  "advertencias": []
+}

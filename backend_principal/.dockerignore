@@ -1,0 +1,19 @@
+# Contexto de build de Dockerfile.webhook / Dockerfile.worker: solo hace
+# falta lo que copian (pyproject, uv.lock, app/, Plantillas Excel/).
+.env
+.env.*
+.venv/
+.git/
+.claude/
+.cursor/
+**/__pycache__/
+*.py[oc]
+.pytest_cache/
+tests/
+loadtest/
+loadtest_results/
+graphify-out/
+backups/
+reports/
+app/services/daily_menu/media/*
+*.md

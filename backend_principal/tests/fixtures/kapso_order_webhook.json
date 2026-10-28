@@ -1,0 +1,48 @@
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "880622108811",
+      "changes": [
+        {
+          "field": "messages",
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15550101234",
+              "phone_number_id": "123456789"
+            },
+            "contacts": [
+              {
+                "user_id": "CO.1000000000000001",
+                "wa_id": "573001234567",
+                "profile": {"name": "Cliente Prueba"}
+              }
+            ],
+            "messages": [
+              {
+                "from": "573001234567",
+                "type": "order",
+                "from_user_id": "CO.1000000000000001",
+                "id": "wamid.ORDER1",
+                "timestamp": "1792556798",
+                "order": {
+                  "text": "",
+                  "product_items": [
+                    {
+                      "quantity": 1,
+                      "product_retailer_id": "mks25c5cms",
+                      "item_price": 18000,
+                      "currency": "COP"
+                    }
+                  ],
+                  "catalog_id": "3637339149808520"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

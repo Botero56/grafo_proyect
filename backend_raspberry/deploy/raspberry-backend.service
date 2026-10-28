@@ -1,0 +1,17 @@
+[Unit]
+Description=Backend Raspberry (impresión y actualizaciones)
+Wants=network-online.target gitlab-ssh.service
+After=network-online.target gitlab-ssh.service
+
+[Service]
+User=__USER__
+WorkingDirectory=/opt/backend_rasperry
+EnvironmentFile=/etc/raspberry-backend.env
+# Solo escucha en local: el acceso externo entra por el túnel de Cloudflare.
+ExecStart=/opt/backend_rasperry/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port __PORT__
+# Restart=always también cubre el reinicio que pide POST /update.
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

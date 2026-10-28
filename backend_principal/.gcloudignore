@@ -1,0 +1,19 @@
+# Lo que `gcloud builds submit` NO sube a Cloud Build (mismo criterio que
+# .dockerignore, salvo tests/: el paso `test` de cloudbuild.yaml los corre).
+# Sin este archivo gcloud usaría .gitignore. Preferir ops/deploy.sh.
+.env
+.env.*
+.venv/
+.git/
+.claude/
+.cursor/
+**/__pycache__/
+*.py[oc]
+.pytest_cache/
+loadtest/
+loadtest_results/
+graphify-out/
+backups/
+reports/
+app/services/daily_menu/media/*
+*.md
