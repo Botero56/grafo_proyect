@@ -52,6 +52,7 @@ Cuente solo lo que responde a lo que le dolió. Ejemplos:
 | "Cada barrio tiene un valor de domicilio distinto" | Usted carga sus barrios con su valor una sola vez y el asistente lo calcula solo. |
 | "Escribir el menú todos los días es una pesadilla" | Usted le manda una foto del menú del día y el asistente lo arma y se lo muestra a los clientes. |
 | "Los clientes quieren hablar con una persona" | Cuando el cliente lo pide, o el asistente no sabe algo, la conversación pasa a su equipo. |
+| "No quiero cambiar de número ni dejar de ver los chats" | Sigue con el mismo número y la misma app de WhatsApp Business en su celular. Ve todas las conversaciones y puede escribirle a cualquier cliente cuando quiera. |
 | "Cuadrar con los domiciliarios es un lío" | El sistema lleva lo que entregó cada domiciliario y el efectivo, y le da el cierre del día. (Plan Premium.) |
 
 Cierre esta parte con una pregunta:
@@ -114,6 +115,10 @@ Cómo decirlo:
 > Claro. ¿Qué es lo que le genera duda? (Escuche.) Si quiere, le dejo la prueba armada con su
 > menú unos días para que la use con calma.
 
+**"¿Tengo que cambiar de número? Mis clientes ya tienen ese."**
+> No. Sigue con el mismo número y con la app de WhatsApp Business en su celular, como siempre.
+> El asistente contesta, y usted ve todos los chats y puede meterse en cualquier conversación.
+
 **"No tengo tiempo para configurar eso."**
 > Usted no configura nada. Me manda la foto del menú y los barrios, y yo se lo dejo listo.
 
@@ -144,7 +149,5 @@ Lo que necesita pedirle:
 
 ## Antes de prometer
 
-- **Que siga usando la app de WhatsApp en el mismo número:** esa conexión (coexistencia) todavía
-  está en pruebas en el sistema. Confírmela con el equipo técnico antes de ofrecerla.
 - **Que el asistente lea comprobantes:** solo en los planes Avanzado y Premium.
 - **Impresora de comandas:** solo en Avanzado y Premium, y se cobra aparte.
