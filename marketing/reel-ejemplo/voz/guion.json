@@ -1,0 +1,36 @@
+{
+  "voz": "em_alex",
+  "velocidad": 1.12,
+  "pausa_entre_frases_ms": 180,
+  "escenas": [
+    {
+      "id": "gancho",
+      "frases": [
+        "Son las doce y media...",
+        "y tu WhatsApp tiene cuarenta y siete chats sin leer."
+      ]
+    },
+    {
+      "id": "chat",
+      "frases": [
+        "Ahora mira esto.",
+        "La inteligencia artificial responde al instante,",
+        "cobra el domicilio solita,",
+        "y revisa el comprobante de pago."
+      ]
+    },
+    {
+      "id": "comanda",
+      "frases": [
+        "Y la comanda sale impresa en tu cocina."
+      ]
+    },
+    {
+      "id": "cta",
+      "frases": [
+        "Tu restaurante vende por WhatsApp. Tú cocinas.",
+        "Escríbenos DEMO y te lo mostramos."
+      ]
+    }
+  ]
+}

@@ -14,7 +14,6 @@ const CHATS = [
   { nombre: "Doña Marta", texto: "Ya transferí, mire" },
   { nombre: "Andrés", texto: "¿Me lo mandan a la 45?" },
   { nombre: "Sofía", texto: "Holaaa ¿siguen abiertos?" },
-  { nombre: "Pedro", texto: "2 bandejas porfa" },
 ];
 
 // 0–3.5 s: el dolor. Chats sin leer que se acumulan y un contador que sube.
