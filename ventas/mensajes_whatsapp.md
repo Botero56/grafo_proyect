@@ -7,7 +7,11 @@ escribir.
 
 ## 1. Primer mensaje
 
-Buenas, ¿hablo con el restaurante {nombre}? Mi nombre es {su nombre}, le escribo desde Medellín. Hicimos un asistente para el WhatsApp de restaurantes: le contesta a los clientes, toma el pedido completo con la dirección y le calcula el domicilio según el barrio. El menú del día se carga mandando una foto. ¿Le puedo mostrar cómo funciona?
+Buenas, ¿hablo con el restaurante {nombre}? Mi nombre es John Botero, le escribo desde Medellín. Hicimos un asistente para el WhatsApp de restaurantes: le contesta a los clientes, toma el pedido completo con la dirección y le calcula el domicilio según el barrio. El menú del día se carga mandando una foto. ¿Le puedo mostrar cómo funciona?
+
+## 1b. Si ya venden por WhatsApp
+
+Buenas, ¿hablo con {nombre}? Mi nombre es John Botero. Vi que reciben los pedidos por WhatsApp. A la hora del almuerzo, ¿quién contesta todos esos mensajes? Tenemos un asistente que los contesta solo: toma el pedido, confirma la dirección, calcula el domicilio, revisa el comprobante de la transferencia y le manda la comanda a la cocina. Sigue con su mismo número y su app de WhatsApp, y usted ve todos los chats. ¿Le muestro cómo quedaría con su menú?
 
 ## 2. Si tienen Instagram o se ve que hacen domicilios
 
