@@ -1,0 +1,108 @@
+# Configuración de Harvey (github.com/ethanplusai/harvey) para vender el bot de
+# WhatsApp para restaurantes. Se copia en la carpeta de Harvey como
+# harvey.local.yaml. Lo que dice PENDIENTE hay que llenarlo antes de usarlo.
+#
+# Límites que hay que tener en cuenta:
+# - Harvey solo envía correo. Los restaurantes de barrio casi no lo leen; esto
+#   sirve para cadenas, franquicias y restaurantes con web propia.
+# - Sus bajas solo se reconocen en inglés ("no thanks", "stop"). Por eso la
+#   línea de baja pide responder STOP, y "no me interesa" hay que revisarlo a
+#   mano en el Outbox. No activen el modo autopiloto.
+# - OpenStreetMap, la fuente gratis de Harvey, no busca restaurantes. Hay que
+#   usar Scavio Google Maps (50 créditos gratis) o DataForSEO, o cargar la
+#   lista de ventas/buscar_restaurantes.py.
+
+persona:
+  name: "PENDIENTE: nombre de quien vende"
+  company: "3B Technology"
+  role: "Ventas"
+  email: "PENDIENTE: correo de un dominio aparte, no el principal"
+  linkedin: ""
+  tone: "cercano y directo, en español de Colombia, tratando de usted; frases cortas; nada de lenguaje de vendedor"
+
+product:
+  name: "Bot de WhatsApp para restaurantes"
+  description: >
+    Escribe siempre en español de Colombia y trata de usted.
+    Un asistente que contesta el WhatsApp del restaurante y toma los pedidos
+    completos: muestra el menú del día, pregunta la dirección, calcula el
+    domicilio según el barrio, recibe el comprobante de transferencia y manda la
+    comanda impresa a la cocina en una impresora térmica. El dueño carga el menú
+    del día mandando una foto por WhatsApp. Cuando hace falta, la conversación
+    pasa a una persona del restaurante. Para restaurantes y corrientazos de
+    Colombia que reciben pedidos y domicilios por WhatsApp.
+  pricing: "PENDIENTE: precio mensual de cada plan, en pesos"
+  key_benefits:
+    - "Contesta y toma pedidos por WhatsApp aunque nadie esté pendiente del celular"
+    - "La comanda sale impresa en cocina apenas el cliente confirma"
+    - "El menú del día se carga con una foto"
+    - "Revisa los comprobantes de transferencia y lleva la cuenta de los domicilios"
+  objection_responses:
+    "muy caro": "Le entiendo. ¿Cuántos pedidos le llegan por WhatsApp en un día normal? Con eso le hago la cuenta de cuánto tiempo le ahorra a quien contesta."
+    "ya tenemos a alguien que contesta": "Muy bien. El bot no reemplaza a esa persona: le quita las preguntas repetidas y le deja los pedidos listos para revisar."
+    "no me interesa": "Listo, no le vuelvo a escribir. Gracias por responder."
+    "los clientes prefieren hablar con una persona": "Cuando el cliente pide hablar con alguien, el bot pasa la conversación a su equipo de inmediato."
+  offer:
+    primary: "PENDIENTE: plan mensual"
+    entry: "PENDIENTE: por ejemplo, una semana de prueba con su propio menú"
+    goal: "book_call"
+    booking_method: "ask_preference"
+    booking_url: ""
+    meeting_duration: "15 minutos"
+    meeting_owner: "PENDIENTE"
+
+icp:
+  industries:
+    - "Restaurante"
+    - "Corrientazo"
+    - "Comida rápida"
+    - "Restaurante con domicilios"
+  company_size: "1-50 empleados"
+  titles:
+    - "Dueño"
+    - "Propietario"
+    - "Administrador"
+    - "Gerente"
+  geography:
+    - "Bogotá, Colombia"
+  hiring_signals:
+    - "Cajero"
+    - "Auxiliar de domicilios"
+    - "Asesor de ventas WhatsApp"
+
+channels:
+  email:
+    enabled: true
+    provider: "gmail"
+    max_daily_sends: 20
+    require_approval: true
+    send_to_risky: false
+    max_bounce_rate: 0.03
+    warmup:
+      start_date: ""          # PENDIENTE: día en que empezó el calentamiento
+      min_days: 14
+      start_sends: 5
+      daily_increase: 3
+      dkim_selector: ""
+    send_window:
+      start: "09:00"
+      end: "11:00"            # antes del almuerzo; al mediodía nadie lee nada
+      weekdays_only: true
+      recipient_timezone: false
+  linkedin:
+    enabled: false
+
+usage:
+  max_daily_claude_percent: 50
+  heartbeat_interval_minutes: 30
+  quiet_hours:
+    start: "20:00"
+    end: "07:00"
+    timezone: "America/Bogota"
+
+compliance:
+  postal_address: "PENDIENTE: dirección física de la empresa"
+  opt_out_line: 'Si no le interesa, responda STOP y no le vuelvo a escribir.'
+  do_not_contact: []          # agregar aquí los dominios de clientes actuales
+  precleared:
+    enabled: false
