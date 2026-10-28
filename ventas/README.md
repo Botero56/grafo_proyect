@@ -6,6 +6,7 @@
 | `datos/leads_whatsapp.tsv` | Restaurantes con prueba de que reciben pedidos por WhatsApp (menú en ola.click o guías de domicilios), con la fuente. |
 | `datos/leads.tsv` | Restaurantes de directorios de empresas registradas, con la fuente. |
 | `buscar_restaurantes.py` | Saca de OpenStreetMap los restaurantes de Medellín y Bello (u otras ciudades) a un CSV, primero los que tienen celular (WhatsApp probable). Gratis y sin cuenta. |
+| `guion_ventas.md` | Guion para vender: apertura, preguntas, cómo mostrar el producto, prueba, precio, objeciones y cierre. |
 | `mensajes_whatsapp.md` | Primer mensaje, seguimiento y respuestas a objeciones, para enviar uno por uno. |
 | `harvey/harvey.local.yaml` | Configuración de [Harvey](https://github.com/ethanplusai/harvey) ya ajustada al producto, por si quieren prospectar por correo. |
 
