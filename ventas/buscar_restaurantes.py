@@ -6,8 +6,8 @@ categorías que nos sirven (restaurante, comida rápida, café) y guarda un CSV
 listo para trabajar: nombre, teléfono, WhatsApp probable, web, Instagram y
 dirección. Solo usa la librería estándar de Python.
 
-    python3 ventas/buscar_restaurantes.py --ciudad bogota
-    python3 ventas/buscar_restaurantes.py --ciudad medellin --radio 8 --salida medellin.csv
+    python3 ventas/buscar_restaurantes.py                    # Medellín y Bello
+    python3 ventas/buscar_restaurantes.py --ciudad envigado itagui --salida sur.csv
     python3 ventas/buscar_restaurantes.py --lat 4.65 --lon -74.06 --radio 3
 
 OpenStreetMap no tiene todos los restaurantes y muchos no traen teléfono. El
@@ -142,6 +142,9 @@ def contactable(f: dict) -> int:
 def procesar(respuesta: dict) -> list[dict]:
     vistos, filas = set(), []
     for el in respuesta.get("elements", []):
+        if (el.get("type"), el.get("id")) in vistos:  # zonas que se cruzan (Medellín y Bello)
+            continue
+        vistos.add((el.get("type"), el.get("id")))
         f = fila(el)
         if not f:
             continue
@@ -156,22 +159,29 @@ def procesar(respuesta: dict) -> list[dict]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--ciudad", choices=sorted(CIUDADES), default="bogota")
+    ap.add_argument("--ciudad", nargs="+", choices=sorted(CIUDADES), default=["medellin", "bello"],
+                    help="una o varias ciudades (por defecto: medellin bello)")
     ap.add_argument("--lat", type=float)
     ap.add_argument("--lon", type=float)
-    ap.add_argument("--radio", type=float, help="km alrededor del centro")
+    ap.add_argument("--radio", type=float, help="km alrededor del centro (para --lat/--lon o una sola ciudad)")
     ap.add_argument("--solo-contactables", action="store_true",
                     help="deja fuera los que no tienen teléfono, Instagram ni web")
     ap.add_argument("--salida", default="restaurantes.csv")
     a = ap.parse_args()
 
-    lat, lon, radio = CIUDADES[a.ciudad]
     if a.lat is not None and a.lon is not None:
-        lat, lon = a.lat, a.lon
-    radio = a.radio or radio
+        zonas = [(a.lat, a.lon, a.radio or 3)]
+    else:
+        zonas = [(lat, lon, a.radio if a.radio and len(a.ciudad) == 1 else r)
+                 for lat, lon, r in (CIUDADES[c] for c in a.ciudad)]
 
-    print(f"Buscando restaurantes a {radio} km de {lat},{lon} en OpenStreetMap...", file=sys.stderr)
-    filas = procesar(pedir(consulta(lat, lon, radio)))
+    elementos = []
+    for i, (lat, lon, radio) in enumerate(zonas):
+        if i:
+            time.sleep(5)  # Overpass es un servicio comunitario: una consulta a la vez
+        print(f"Buscando restaurantes a {radio} km de {lat},{lon} en OpenStreetMap...", file=sys.stderr)
+        elementos += pedir(consulta(lat, lon, radio)).get("elements", [])
+    filas = procesar({"elements": elementos})
     if a.solo_contactables:
         filas = [f for f in filas if contactable(f) < 4]
 

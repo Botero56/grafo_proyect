@@ -18,7 +18,7 @@ persona:
   role: "Ventas"
   email: "PENDIENTE: correo de un dominio aparte, no el principal"
   linkedin: ""
-  tone: "cercano y directo, en español de Colombia, tratando de usted; frases cortas; nada de lenguaje de vendedor"
+  tone: "cercano y directo, en español de Antioquia, tratando de usted; frases cortas; nada de lenguaje de vendedor"
 
 product:
   name: "Bot de WhatsApp para restaurantes"
@@ -31,19 +31,22 @@ product:
     del día mandando una foto por WhatsApp. Cuando hace falta, la conversación
     pasa a una persona del restaurante. Para restaurantes y corrientazos de
     Colombia que reciben pedidos y domicilios por WhatsApp.
-  pricing: "PENDIENTE: precio mensual de cada plan, en pesos"
+  pricing: >
+    Básico $350.000 al mes, Avanzado $450.000 al mes, Premium $550.000 al mes.
+    Instalación $200.000 en todos los planes. Impresora de comandas opcional en
+    Avanzado y Premium: $350.000 con instalación.
   key_benefits:
     - "Contesta y toma pedidos por WhatsApp aunque nadie esté pendiente del celular"
     - "La comanda sale impresa en cocina apenas el cliente confirma"
     - "El menú del día se carga con una foto"
     - "Revisa los comprobantes de transferencia y lleva la cuenta de los domicilios"
   objection_responses:
-    "muy caro": "Le entiendo. ¿Cuántos pedidos le llegan por WhatsApp en un día normal? Con eso le hago la cuenta de cuánto tiempo le ahorra a quien contesta."
+    "muy caro": "Le entiendo. El plan Básico vale $350.000 al mes, menos que medio sueldo de alguien que conteste el WhatsApp. ¿Cuántos pedidos le llegan por ahí en un día normal?"
     "ya tenemos a alguien que contesta": "Muy bien. El bot no reemplaza a esa persona: le quita las preguntas repetidas y le deja los pedidos listos para revisar."
     "no me interesa": "Listo, no le vuelvo a escribir. Gracias por responder."
     "los clientes prefieren hablar con una persona": "Cuando el cliente pide hablar con alguien, el bot pasa la conversación a su equipo de inmediato."
   offer:
-    primary: "PENDIENTE: plan mensual"
+    primary: "Plan Avanzado, $450.000 al mes más $200.000 de instalación"
     entry: "PENDIENTE: por ejemplo, una semana de prueba con su propio menú"
     goal: "book_call"
     booking_method: "ask_preference"
@@ -64,7 +67,8 @@ icp:
     - "Administrador"
     - "Gerente"
   geography:
-    - "Bogotá, Colombia"
+    - "Medellín, Antioquia, Colombia"
+    - "Bello, Antioquia, Colombia"
   hiring_signals:
     - "Cajero"
     - "Auxiliar de domicilios"

@@ -1,4 +1,4 @@
-# Mensajes para contactar restaurantes
+# Mensajes para contactar restaurantes (Medellín y Bello)
 
 Para mandar uno por uno desde el WhatsApp de ventas, nunca desde el número del
 bot ni con envíos masivos: Meta bloquea los números que lo hacen. Cambie lo que
@@ -7,11 +7,11 @@ escribir.
 
 ## 1. Primer mensaje
 
-Buenas tardes, ¿hablo con el restaurante {nombre}? Mi nombre es {su nombre}. Hicimos un asistente para el WhatsApp de restaurantes: toma el pedido completo, calcula el domicilio por barrio y la comanda sale impresa en cocina. El menú del día se carga mandando una foto. ¿Le puedo mostrar cómo funciona?
+Buenas, ¿hablo con el restaurante {nombre}? Mi nombre es {su nombre}, le escribo desde Medellín. Hicimos un asistente para el WhatsApp de restaurantes: le contesta a los clientes, toma el pedido completo con la dirección y le calcula el domicilio según el barrio. El menú del día se carga mandando una foto. ¿Le puedo mostrar cómo funciona?
 
 ## 2. Si tienen Instagram o se ve que hacen domicilios
 
-Hola, vi que {nombre} hace domicilios por WhatsApp. A la hora del almuerzo se acumulan los mensajes y alguien tiene que contestar uno por uno, ¿cierto? Tenemos un asistente que contesta, toma el pedido y lo manda impreso a la cocina. ¿Le interesa verlo funcionando con su propio menú?
+Hola, vi que {nombre} hace domicilios por WhatsApp. A la hora del almuerzo se llenan los mensajes y alguien tiene que contestar uno por uno, ¿cierto? Tenemos un asistente que contesta, toma el pedido y se lo deja listo. Si quiere, la comanda le sale impresa en la cocina. ¿Le gustaría verlo funcionando con su propio menú?
 
 ## 3. Seguimiento (3 o 4 días después, una sola vez)
 
@@ -19,11 +19,23 @@ Hola de nuevo. Le escribí la semana pasada por el asistente de pedidos para Wha
 
 ## 4. Cuando responden que sí
 
-Listo, con mucho gusto. Mándeme una foto del menú de hoy y el listado de barrios a donde hace domicilios con el valor de cada uno. Con eso se lo dejo armado y le paso el número para que pruebe.
+Listo, con mucho gusto. Mándeme una foto del menú de hoy y los barrios a donde hace domicilios con el valor de cada uno. Con eso se lo dejo armado y le paso el número para que pruebe.
 
-## 5. Respuestas rápidas a las objeciones de siempre
+## 5. Cuando preguntan cuánto vale
 
-**"Está muy caro."** Le entiendo. ¿Cuántos pedidos le llegan por WhatsApp en un día normal? Con eso le muestro cuánto tiempo le quita a quien contesta.
+Tenemos tres planes, todos con $200.000 de instalación:
+
+- Básico, $350.000 al mes: el bot toma pedidos (también por catálogo y notas de voz), usted carga el menú con una foto, maneja domicilios por zona y pago en efectivo. Las transferencias las confirma una persona suya.
+- Avanzado, $450.000 al mes: todo lo del Básico, y el bot mismo lee los comprobantes de transferencia. Puede agregar la impresora de comandas por $350.000 con instalación.
+- Premium, $550.000 al mes: todo lo del Avanzado, más el manejo de domiciliarios con su liquidación y cierre del día, estadísticas, consultas de pedidos y reportes en Excel. La impresora también es opcional, por $350.000.
+
+Si arranca en uno y después sube de plan, no pierde nada: los pedidos quedan guardados desde el primer día.
+
+Para un restaurante que hace domicilios y recibe transferencias, el que más sirve es el Avanzado. Si tiene domiciliarios propios, el Premium.
+
+## 6. Respuestas rápidas a las objeciones de siempre
+
+**"Está muy caro."** Le entiendo. ¿Cuántos pedidos le llegan por WhatsApp en un día normal? Con eso le muestro cuánto tiempo le quita a quien contesta. Y si quiere empezar suave, el Básico vale $350.000 al mes.
 
 **"Ya tengo a alguien que contesta."** Perfecto, el asistente no la reemplaza. Le quita las preguntas repetidas (horario, menú, cuánto vale el domicilio) y le deja el pedido listo para revisar.
 

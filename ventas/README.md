@@ -2,14 +2,14 @@
 
 | Archivo | Para qué |
 |---|---|
-| `buscar_restaurantes.py` | Saca de OpenStreetMap los restaurantes de una ciudad a un CSV, primero los que tienen celular (WhatsApp probable). Gratis y sin cuenta. |
+| `buscar_restaurantes.py` | Saca de OpenStreetMap los restaurantes de Medellín y Bello (u otras ciudades) a un CSV, primero los que tienen celular (WhatsApp probable). Gratis y sin cuenta. |
 | `mensajes_whatsapp.md` | Primer mensaje, seguimiento y respuestas a objeciones, para enviar uno por uno. |
 | `harvey/harvey.local.yaml` | Configuración de [Harvey](https://github.com/ethanplusai/harvey) ya ajustada al producto, por si quieren prospectar por correo. |
 
 ## Paso a paso
 
 ```bash
-python3 ventas/buscar_restaurantes.py --ciudad bogota --solo-contactables --salida restaurantes_bogota.csv
+python3 ventas/buscar_restaurantes.py --solo-contactables --salida restaurantes_medellin_bello.csv
 ```
 
 Abra el CSV en Excel o Google Sheets y trabájelo de arriba hacia abajo: los que
