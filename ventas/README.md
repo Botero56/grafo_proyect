@@ -2,6 +2,8 @@
 
 | Archivo | Para qué |
 |---|---|
+| `seguimiento_clientes.xlsx` | Hoja de seguimiento con 101 restaurantes de Medellín y Bello (teléfono, enlace a WhatsApp, estado, fechas, plan) y un resumen que se calcula solo. |
+| `datos/leads.tsv` | Los mismos restaurantes en texto plano, con la fuente de cada uno. |
 | `buscar_restaurantes.py` | Saca de OpenStreetMap los restaurantes de Medellín y Bello (u otras ciudades) a un CSV, primero los que tienen celular (WhatsApp probable). Gratis y sin cuenta. |
 | `mensajes_whatsapp.md` | Primer mensaje, seguimiento y respuestas a objeciones, para enviar uno por uno. |
 | `harvey/harvey.local.yaml` | Configuración de [Harvey](https://github.com/ethanplusai/harvey) ya ajustada al producto, por si quieren prospectar por correo. |
