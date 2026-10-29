@@ -1,6 +1,7 @@
 {
-  "voz": "em_alex",
-  "velocidad": 1.12,
+  "perfil_voz": "95422921",
+  "motor": "cosyvoice",
+  "velocidad": 1.05,
   "pausa_entre_frases_ms": 180,
   "escenas": [
     {
@@ -15,8 +16,7 @@
       "frases": [
         "Ahora mira esto.",
         "La inteligencia artificial responde al instante,",
-        "cobra el domicilio solita,",
-        "y revisa el comprobante de pago."
+        "cobra el domicilio solita y revisa el comprobante de pago."
       ]
     },
     {

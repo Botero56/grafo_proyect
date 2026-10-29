@@ -1,413 +1,412 @@
 {
   "gancho": {
-    "duracionMs": 4326,
+    "duracionMs": 6281,
     "subtitulos": [
       {
         "text": "Son",
         "startMs": 0,
-        "endMs": 239,
-        "timestampMs": 120,
+        "endMs": 180,
+        "timestampMs": 90,
         "confidence": null
       },
       {
         "text": " las",
-        "startMs": 239,
-        "endMs": 478,
-        "timestampMs": 359,
+        "startMs": 180,
+        "endMs": 360,
+        "timestampMs": 270,
         "confidence": null
       },
       {
         "text": " doce",
-        "startMs": 478,
-        "endMs": 765,
-        "timestampMs": 622,
+        "startMs": 360,
+        "endMs": 620,
+        "timestampMs": 490,
         "confidence": null
       },
       {
         "text": " y",
-        "startMs": 765,
-        "endMs": 908,
-        "timestampMs": 837,
+        "startMs": 620,
+        "endMs": 720,
+        "timestampMs": 670,
         "confidence": null
       },
       {
         "text": " media...",
-        "startMs": 908,
-        "endMs": 1386,
-        "timestampMs": 1147,
+        "startMs": 720,
+        "endMs": 1120,
+        "timestampMs": 920,
         "confidence": null,
         "pageBreakAfter": true
       },
       {
         "text": "y",
-        "startMs": 1566,
-        "endMs": 1698,
-        "timestampMs": 1632,
+        "startMs": 1331,
+        "endMs": 1691,
+        "timestampMs": 1511,
         "confidence": null
       },
       {
         "text": " tu",
-        "startMs": 1698,
-        "endMs": 1873,
-        "timestampMs": 1786,
+        "startMs": 1691,
+        "endMs": 1991,
+        "timestampMs": 1841,
         "confidence": null
       },
       {
         "text": " WhatsApp",
-        "startMs": 1873,
-        "endMs": 2311,
-        "timestampMs": 2092,
+        "startMs": 1991,
+        "endMs": 2211,
+        "timestampMs": 2101,
         "confidence": null
       },
       {
         "text": " tiene",
-        "startMs": 2311,
-        "endMs": 2618,
-        "timestampMs": 2464,
+        "startMs": 2211,
+        "endMs": 2651,
+        "timestampMs": 2431,
         "confidence": null
       },
       {
         "text": " cuarenta",
-        "startMs": 2618,
-        "endMs": 3056,
-        "timestampMs": 2837,
+        "startMs": 2651,
+        "endMs": 4271,
+        "timestampMs": 3461,
         "confidence": null
       },
       {
         "text": " y",
-        "startMs": 3056,
-        "endMs": 3187,
-        "timestampMs": 3121,
+        "startMs": 4271,
+        "endMs": 4311,
+        "timestampMs": 4291,
         "confidence": null
       },
       {
         "text": " siete",
-        "startMs": 3187,
-        "endMs": 3494,
-        "timestampMs": 3340,
+        "startMs": 4311,
+        "endMs": 4591,
+        "timestampMs": 4451,
         "confidence": null
       },
       {
         "text": " chats",
-        "startMs": 3494,
-        "endMs": 3800,
-        "timestampMs": 3647,
+        "startMs": 4591,
+        "endMs": 5191,
+        "timestampMs": 4891,
         "confidence": null
       },
       {
         "text": " sin",
-        "startMs": 3800,
-        "endMs": 4019,
-        "timestampMs": 3910,
+        "startMs": 5191,
+        "endMs": 5851,
+        "timestampMs": 5521,
         "confidence": null
       },
       {
         "text": " leer.",
-        "startMs": 4019,
-        "endMs": 4326,
-        "timestampMs": 4173,
+        "startMs": 5851,
+        "endMs": 6131,
+        "timestampMs": 5991,
         "confidence": null,
         "pageBreakAfter": true
       }
     ]
   },
   "chat": {
-    "duracionMs": 7517,
+    "duracionMs": 11322,
     "subtitulos": [
       {
         "text": "Ahora",
-        "startMs": 0,
-        "endMs": 354,
-        "timestampMs": 177,
+        "startMs": 80,
+        "endMs": 640,
+        "timestampMs": 360,
         "confidence": null
       },
       {
         "text": " mira",
-        "startMs": 354,
-        "endMs": 657,
-        "timestampMs": 505,
+        "startMs": 640,
+        "endMs": 880,
+        "timestampMs": 760,
         "confidence": null
       },
       {
         "text": " esto.",
-        "startMs": 657,
-        "endMs": 1011,
-        "timestampMs": 834,
+        "startMs": 880,
+        "endMs": 1200,
+        "timestampMs": 1040,
         "confidence": null,
         "pageBreakAfter": true
       },
       {
         "text": "La",
-        "startMs": 1191,
-        "endMs": 1386,
-        "timestampMs": 1288,
+        "startMs": 1530,
+        "endMs": 3750,
+        "timestampMs": 2640,
         "confidence": null
       },
       {
         "text": " inteligencia",
-        "startMs": 1386,
-        "endMs": 2070,
-        "timestampMs": 1728,
+        "startMs": 3750,
+        "endMs": 4370,
+        "timestampMs": 4060,
         "confidence": null
       },
       {
         "text": " artificial",
-        "startMs": 2070,
-        "endMs": 2656,
-        "timestampMs": 2363,
+        "startMs": 4370,
+        "endMs": 4930,
+        "timestampMs": 4650,
         "confidence": null
       },
       {
         "text": " responde",
-        "startMs": 2656,
-        "endMs": 3144,
-        "timestampMs": 2900,
+        "startMs": 4930,
+        "endMs": 5730,
+        "timestampMs": 5330,
         "confidence": null
       },
       {
         "text": " al",
-        "startMs": 3144,
-        "endMs": 3339,
-        "timestampMs": 3242,
+        "startMs": 5730,
+        "endMs": 5830,
+        "timestampMs": 5780,
         "confidence": null
       },
       {
         "text": " instante,",
-        "startMs": 3339,
-        "endMs": 3877,
-        "timestampMs": 3608,
+        "startMs": 5830,
+        "endMs": 6690,
+        "timestampMs": 6260,
         "confidence": null,
         "pageBreakAfter": true
       },
       {
         "text": "cobra",
-        "startMs": 4057,
-        "endMs": 4382,
-        "timestampMs": 4219,
+        "startMs": 7020,
+        "endMs": 7600,
+        "timestampMs": 7310,
         "confidence": null
       },
       {
         "text": " el",
-        "startMs": 4382,
-        "endMs": 4568,
-        "timestampMs": 4475,
+        "startMs": 7600,
+        "endMs": 7740,
+        "timestampMs": 7670,
         "confidence": null
       },
       {
         "text": " domicilio",
-        "startMs": 4568,
-        "endMs": 5079,
-        "timestampMs": 4823,
+        "startMs": 7740,
+        "endMs": 8300,
+        "timestampMs": 8020,
         "confidence": null
       },
       {
-        "text": " solita,",
-        "startMs": 5079,
-        "endMs": 5497,
-        "timestampMs": 5288,
-        "confidence": null,
-        "pageBreakAfter": true
+        "text": " solita",
+        "startMs": 8300,
+        "endMs": 8700,
+        "timestampMs": 8500,
+        "confidence": null
       },
       {
-        "text": "y",
-        "startMs": 5677,
-        "endMs": 5818,
-        "timestampMs": 5748,
+        "text": " y",
+        "startMs": 8700,
+        "endMs": 8880,
+        "timestampMs": 8790,
         "confidence": null
       },
       {
         "text": " revisa",
-        "startMs": 5818,
-        "endMs": 6196,
-        "timestampMs": 6007,
+        "startMs": 8880,
+        "endMs": 9380,
+        "timestampMs": 9130,
         "confidence": null
       },
       {
         "text": " el",
-        "startMs": 6196,
-        "endMs": 6385,
-        "timestampMs": 6290,
+        "startMs": 9380,
+        "endMs": 10300,
+        "timestampMs": 9840,
         "confidence": null
       },
       {
         "text": " comprobante",
-        "startMs": 6385,
-        "endMs": 6998,
-        "timestampMs": 6691,
+        "startMs": 10300,
+        "endMs": 10860,
+        "timestampMs": 10580,
         "confidence": null
       },
       {
         "text": " de",
-        "startMs": 6998,
-        "endMs": 7187,
-        "timestampMs": 7093,
+        "startMs": 10860,
+        "endMs": 11000,
+        "timestampMs": 10930,
         "confidence": null
       },
       {
         "text": " pago.",
-        "startMs": 7187,
-        "endMs": 7517,
-        "timestampMs": 7352,
+        "startMs": 11000,
+        "endMs": 11260,
+        "timestampMs": 11130,
         "confidence": null,
         "pageBreakAfter": true
       }
     ]
   },
   "comanda": {
-    "duracionMs": 2282,
+    "duracionMs": 5160,
     "subtitulos": [
       {
         "text": "Y",
-        "startMs": 0,
-        "endMs": 143,
-        "timestampMs": 71,
+        "startMs": 80,
+        "endMs": 920,
+        "timestampMs": 500,
         "confidence": null
       },
       {
         "text": " la",
-        "startMs": 143,
-        "endMs": 333,
-        "timestampMs": 238,
+        "startMs": 920,
+        "endMs": 1000,
+        "timestampMs": 960,
         "confidence": null
       },
       {
         "text": " comanda",
-        "startMs": 333,
-        "endMs": 761,
-        "timestampMs": 547,
+        "startMs": 1000,
+        "endMs": 1580,
+        "timestampMs": 1290,
         "confidence": null
       },
       {
         "text": " sale",
-        "startMs": 761,
-        "endMs": 1046,
-        "timestampMs": 903,
+        "startMs": 1580,
+        "endMs": 2460,
+        "timestampMs": 2020,
         "confidence": null
       },
       {
         "text": " impresa",
-        "startMs": 1046,
-        "endMs": 1474,
-        "timestampMs": 1260,
+        "startMs": 2460,
+        "endMs": 4220,
+        "timestampMs": 3340,
         "confidence": null
       },
       {
         "text": " en",
-        "startMs": 1474,
-        "endMs": 1664,
-        "timestampMs": 1569,
+        "startMs": 4220,
+        "endMs": 4440,
+        "timestampMs": 4330,
         "confidence": null
       },
       {
         "text": " tu",
-        "startMs": 1664,
-        "endMs": 1854,
-        "timestampMs": 1759,
+        "startMs": 4440,
+        "endMs": 4600,
+        "timestampMs": 4520,
         "confidence": null
       },
       {
         "text": " cocina.",
-        "startMs": 1854,
-        "endMs": 2282,
-        "timestampMs": 2068,
+        "startMs": 4600,
+        "endMs": 5020,
+        "timestampMs": 4810,
         "confidence": null,
         "pageBreakAfter": true
       }
     ]
   },
   "cta": {
-    "duracionMs": 4827,
+    "duracionMs": 5940,
     "subtitulos": [
       {
         "text": "Tu",
         "startMs": 0,
-        "endMs": 195,
-        "timestampMs": 98,
+        "endMs": 100,
+        "timestampMs": 50,
         "confidence": null
       },
       {
         "text": " restaurante",
-        "startMs": 195,
-        "endMs": 830,
-        "timestampMs": 513,
+        "startMs": 100,
+        "endMs": 700,
+        "timestampMs": 400,
         "confidence": null
       },
       {
         "text": " vende",
-        "startMs": 830,
-        "endMs": 1172,
-        "timestampMs": 1001,
+        "startMs": 700,
+        "endMs": 1000,
+        "timestampMs": 850,
         "confidence": null
       },
       {
         "text": " por",
-        "startMs": 1172,
-        "endMs": 1417,
-        "timestampMs": 1295,
+        "startMs": 1000,
+        "endMs": 1220,
+        "timestampMs": 1110,
         "confidence": null
       },
       {
         "text": " WhatsApp.",
-        "startMs": 1417,
-        "endMs": 1954,
-        "timestampMs": 1685,
+        "startMs": 1220,
+        "endMs": 1700,
+        "timestampMs": 1460,
         "confidence": null
       },
       {
         "text": " Tú",
-        "startMs": 1954,
-        "endMs": 2150,
-        "timestampMs": 2052,
+        "startMs": 2440,
+        "endMs": 2920,
+        "timestampMs": 2680,
         "confidence": null
       },
       {
         "text": " cocinas.",
-        "startMs": 2150,
-        "endMs": 2638,
-        "timestampMs": 2394,
+        "startMs": 2920,
+        "endMs": 3480,
+        "timestampMs": 3200,
         "confidence": null,
         "pageBreakAfter": true
       },
       {
         "text": "Escríbenos",
-        "startMs": 2818,
-        "endMs": 3406,
-        "timestampMs": 3112,
+        "startMs": 3890,
+        "endMs": 4370,
+        "timestampMs": 4130,
         "confidence": null
       },
       {
         "text": " DEMO",
-        "startMs": 3406,
-        "endMs": 3700,
-        "timestampMs": 3553,
+        "startMs": 4370,
+        "endMs": 4790,
+        "timestampMs": 4580,
         "confidence": null
       },
       {
         "text": " y",
-        "startMs": 3700,
-        "endMs": 3847,
-        "timestampMs": 3774,
+        "startMs": 4790,
+        "endMs": 5030,
+        "timestampMs": 4910,
         "confidence": null
       },
       {
         "text": " te",
-        "startMs": 3847,
-        "endMs": 4043,
-        "timestampMs": 3945,
+        "startMs": 5030,
+        "endMs": 5170,
+        "timestampMs": 5100,
         "confidence": null
       },
       {
         "text": " lo",
-        "startMs": 4043,
-        "endMs": 4239,
-        "timestampMs": 4141,
+        "startMs": 5170,
+        "endMs": 5250,
+        "timestampMs": 5210,
         "confidence": null
       },
       {
         "text": " mostramos.",
-        "startMs": 4239,
-        "endMs": 4827,
-        "timestampMs": 4533,
+        "startMs": 5250,
+        "endMs": 5790,
+        "timestampMs": 5520,
         "confidence": null,
         "pageBreakAfter": true
       }

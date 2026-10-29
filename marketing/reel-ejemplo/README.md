@@ -28,32 +28,28 @@ npx remotion render ReelPedidoWhatsApp out/reel.mp4
 
 ## Voz y subtítulos
 
-La voz se genera con [Kokoro](https://github.com/thewh1teagle/kokoro-onnx), un
-modelo de voz abierto que corre en tu computador (gratis, sin API key).
+La voz es tu voz clonada con [VoiceStudio](https://github.com/debpalash/VoiceStudio)
+(app local, gratis) usando el motor **CosyVoice 3** (Apache-2.0, se puede usar
+comercialmente). El perfil de voz está en `voz/guion.json` (`perfil_voz`).
 
-1. Cambia el texto en `voz/guion.json`. Escribe los números en palabras
-   ("doce y media"). Voces en español: `em_alex` (hombre, la que se usa),
-   `ef_dora` (mujer), `em_santa`.
-2. Descarga `kokoro-v1.0.onnx` y `voices-v1.0.bin` de
-   https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.0
+1. Abre VoiceStudio.
+2. Cambia el texto en `voz/guion.json`. Escribe los números en palabras
+   ("doce y media") y evita frases muy cortas: CosyVoice a veces inventa
+   palabras en ellas.
 3. Genera audio y subtítulos:
 
 ```bash
-pip install kokoro-onnx soundfile
-python voz/generar_voz.py <carpeta-con-los-modelos>
+pip install numpy soundfile requests faster-whisper
+python voz/generar_voz.py
 ```
 
-Eso escribe `public/voz/*.wav` y `src/voz/subtitulos.json`. Si la voz de una
-escena queda más larga, sube el `durationInFrames` de esa escena en
-`src/ReelPedidoWhatsApp.tsx` y el total en `src/Root.tsx`.
+Cada frase se genera, se transcribe con Whisper y se compara con el guion; si
+CosyVoice repitió o inventó algo, se reintenta con otra semilla (hasta 4
+veces). Las frases buenas quedan en `voz/.cache/` y no se regeneran. En CPU
+cada frase tarda 1–3 minutos.
 
-Los tiempos de cada palabra se calculan repartiendo la duración de cada frase
-según el largo de las palabras, así que pueden ir unas décimas adelantados o
-atrasados. Los subtítulos (estilo Reels, palabra activa en amarillo) están en
-`src/Subtitulos.tsx`.
-
-Para una voz más natural con acento colombiano, se puede cambiar Kokoro por
-ElevenLabs (de pago) generando los mismos archivos `public/voz/<escena>.wav`.
+Escribe `public/voz/*.wav` y `src/voz/subtitulos.json` (tiempos reales de cada
+palabra). Cada escena se alarga sola si su voz dura más que la animación.
 
 La fuente Inter va incluida en `public/fonts` (licencia SIL OFL), así que el
 render no necesita internet.

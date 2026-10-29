@@ -1,5 +1,5 @@
 import { Composition, Folder } from "remotion";
-import { ReelPedidoWhatsApp } from "./ReelPedidoWhatsApp";
+import { ReelPedidoWhatsApp, duracionTotal } from "./ReelPedidoWhatsApp";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -7,7 +7,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="ReelPedidoWhatsApp"
         component={ReelPedidoWhatsApp}
-        durationInFrames={717}
+        durationInFrames={duracionTotal(30)}
         fps={30}
         width={1080}
         height={1920}
